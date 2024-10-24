@@ -11,15 +11,17 @@ using namespace std::chrono;
 using std::cout;
 using std::cin;
 using std::endl;
+
 // Character class
 class Character {
 public:
     string name;
     int age;
-    Character(string n, int a) : name(n), age(a) {} // still needa fix the constructor
+    Character(string n, int a) : name(n), age(a) {} // fixed the constructor
     Character() = default;
 };
-// Lineage, class. Holds Lineage info 
+
+// Lineage class. Holds Lineage info 
 class Lineage {
 public:
     int Bagger;
@@ -29,7 +31,8 @@ public:
 
     Lineage(int B, int N, int M, int A) : Bagger(B), Noble(N), Monster(M), Assassin(A) {}
 };
-// Player Class, class. Hold the Class list/ info
+
+// Player Class. Holds the Class list/info
 class Class {
 public:
     int Wizard;
@@ -37,7 +40,6 @@ public:
     int Monk;
     int Rogue;
     Class(int W, int B, int M, int R) : Wizard(W), Barbarian(B), Monk(M), Rogue(R) {}
-
     Class() = default;
 };
 
@@ -48,9 +50,10 @@ void LineageMenu() { // this is the main display menu that the player will see a
     cout << "[2]Noble " << endl;
     cout << "[3]Monster " << endl;
     cout << "[4]Assassin " << endl;
-    cout << "[5]-Quit-" << endl;
+    cout << "[5]-Exit- " << endl;
     cout << "-----------" << endl;
-};
+}
+
 // Sub Menu [2] Function
 void ClassMenu() {
     cout << "__________" << endl;
@@ -58,11 +61,18 @@ void ClassMenu() {
     cout << "[2]Barbarian " << endl;
     cout << "[3]Monk " << endl;
     cout << "[4]Rogue " << endl;
-    cout << "[5]<Back " << endl;
+    cout << "[5]-Exit- " << endl;
     cout << "----------" << endl;
 }
 
-int Exit_Answr;
+void StatsMenu(const string& name, int age, int choice, int choice2) {
+    cout << "___________" << endl;
+    cout << "Name: " << name << endl;
+    cout << "Age: " << age << endl;
+    cout << "Lineage: " << choice << endl;
+    cout << "Class: " << choice2 << endl;
+    cout << "-----------" << endl;
+}
 
 int main() {
     cout << "RPG_Chrctr_Creator v1.0\n\n";
@@ -81,30 +91,26 @@ int main() {
     cout << "\nHello there! " << character.name << " What is your Ancestry?: " << endl;
     LineageMenu();
 
-    /* std::srand(std::time(0));
-       cout << (std::rand() % 8) + 1 << endl; */ // random number between 1-8
-
-    // Exit loop choices
-    int choice,choice2 = 0;
-    
-
+    int choice = 0, choice2 = 0;
+    int Exit_Answr = 0;
 
     do {
         cin >> choice;
         switch (choice) {
         case 1:
             cout << "\n Ah yes, a poor Bagger indeed\n";
-            ClassMenu();
-            break;
+            cout << "Hello World!" << endl;
+            choice = 5;
+            continue;
         case 2:
             cout << "\n Noble indeed, great things are to be expected of you\n";
-            break;
+            continue;
         case 3:
             cout << "\n You're a Monster!, selfish and ugly yet dangerous!\n";
-            break;
+            continue;
         case 4:
             cout << "\n An Assassin is sneaky and agile, use this info wisely\n";
-            break;
+            continue;
         case 5:
             cout << "\nAre you sure you want to Quit?\n";
             cout << "([1]y / [2]n)?" << endl;
@@ -126,21 +132,25 @@ int main() {
             cout << "Invalid option, please try again" << endl;
         }
     } while (choice != 5);
+
     ClassMenu();
-   int Exit_Answr = 0;
-    
+
     do {
         cin >> choice2;
-
         switch (choice2) {
         case 1:
-            break;
+            cout << "Wizard\n ";
+            choice2 = 5;
+            continue;
         case 2:
-            break;
+            cout << "Barbarian\n ";
+            continue;
         case 3:
-            break;
+            cout << "Monk\n ";
+            continue;
         case 4:
-            break;
+            cout << "Rogue\n ";
+            continue;
         case 5:
             cout << "\nAre you sure you want to Quit?\n";
             cout << "([1]y / [2]n)?" << endl;
@@ -160,14 +170,14 @@ int main() {
             break;
         default:
             cout << "Invalid option, please try again" << endl;
-
         }
-        
-
     } while (choice2 != 5);
+
+    StatsMenu(character.name, character.age, choice, choice2);
 
     return 0;
 }
+
 
 
 
